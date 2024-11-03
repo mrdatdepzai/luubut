@@ -16,8 +16,11 @@ import {
   Email,
   Language
 } from '@mui/icons-material';
+import { useTheme } from '@mui/material/styles';
 
 const ContactAuthor = () => {
+  const theme = useTheme();
+
   const socialLinks = [
     {
       icon: <Facebook />,
@@ -45,7 +48,7 @@ const ContactAuthor = () => {
     },
     {
       icon: <Language />,
-      url: "https://luubut.netlify.app",
+      url: "https://nguyendat.net",
       label: "Website",
       color: "#2196f3"
     }
@@ -58,7 +61,10 @@ const ContactAuthor = () => {
         mt: 2,
         mb: 2,
         borderRadius: '12px',
-        background: 'linear-gradient(145deg, #ffffff 0%, #f5f5f5 100%)'
+        bgcolor: theme.palette.mode === 'dark' ? 'background.paper' : 'background.default',
+        background: theme.palette.mode === 'dark' 
+          ? 'linear-gradient(145deg, #1e1e1e 0%, #2d2d2d 100%)'
+          : 'linear-gradient(145deg, #ffffff 0%, #f5f5f5 100%)',
       }}
     >
       <CardContent>
@@ -74,8 +80,10 @@ const ContactAuthor = () => {
               width: 80, 
               height: 80, 
               mb: 2,
-              border: '3px solid #fff',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+              border: `3px solid ${theme.palette.mode === 'dark' ? '#2d2d2d' : '#fff'}`,
+              boxShadow: theme.palette.mode === 'dark' 
+                ? '0 4px 12px rgba(0,0,0,0.3)'
+                : '0 4px 12px rgba(0,0,0,0.15)'
             }}
           />
           <Typography 

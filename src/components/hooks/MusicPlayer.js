@@ -14,10 +14,6 @@ import {
   CardActionArea
 } from "@mui/material";
 import {
-  Facebook,
-  Instagram,
-  Email,
-  GitHub,
   Favorite,
   FavoriteBorder,
   VolumeUp,
@@ -29,6 +25,16 @@ import {
   QueueMusic // Icon cho playlist
 } from '@mui/icons-material';
 import audioFile from './nhac.mp3'; // Thêm import file nhạc
+import styled from '@mui/material/styles/styled';
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1e1e1e' : '#ffffff',
+  padding: theme.spacing(2),
+  borderRadius: theme.shape.borderRadius,
+  boxShadow: theme.palette.mode === 'dark' 
+    ? 'none' 
+    : '0 2px 4px rgba(0,0,0,0.1)',
+}));
 
 const MusicPlayer = () => {
   const [playing, setPlaying] = useState(false);
@@ -101,14 +107,7 @@ const MusicPlayer = () => {
           />
         </CardActionArea>
 
-        <Box sx={{
-          ml: { md: '1em' },
-          mt: { xs: '1em' },
-          display: "flex",
-          flexDirection: "column",
-          width: '100%',
-          p: 2
-        }}>
+        <StyledBox>
           <CardContent sx={{ 
             width: '100%',
             display: 'flex',
@@ -270,36 +269,8 @@ const MusicPlayer = () => {
                 </Typography>
               </Box>
             </Collapse>
-
-            {/* Social Links */}
-            <Box sx={{ 
-              display: 'flex', 
-              gap: 2, 
-              justifyContent: 'center'
-            }}>
-              <Tooltip title="Facebook">
-                <IconButton onClick={() => window.open("https://facebook.com/mrdatdepzai", "_blank")}>
-                  <Facebook />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Instagram">
-                <IconButton onClick={() => window.open("https://instagram.com/mrdatdepzai", "_blank")}>
-                  <Instagram />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="GitHub">
-                <IconButton onClick={() => window.open("https://github.com/mrdatdepzai", "_blank")}>
-                  <GitHub />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Email">
-                <IconButton onClick={() => window.open("mailto:dat037sk@gmail.com", "_blank")}>
-                  <Email />
-                </IconButton>
-              </Tooltip>
-            </Box>
           </CardContent>
-        </Box>
+        </StyledBox>
       </Card>
 
       {/* Audio Element */}
