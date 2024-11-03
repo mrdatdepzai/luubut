@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Card,
   CardContent,
@@ -15,8 +15,6 @@ import {
 import {
   Favorite,
   FavoriteBorder,
-  VolumeUp,
-  VolumeDown,
   PlayArrow,
   Pause,
   SkipNext,
