@@ -22,10 +22,14 @@ const Thanks = ({ show, data, available }) => {
     setOpenImage(false);
   };
 
+  const handleReadLetter = () => {
+    console.log("Đọc lại thư");
+  };
+
   return (
     <>
       <Collapse 
-        in={!show & !available}
+        in={!show && !available}
         timeout={800}
       >
         <div className="thanks-container">
@@ -39,14 +43,14 @@ const Thanks = ({ show, data, available }) => {
               },
             }}
           >
-              <CardContent
-                  sx={{pt: 3, pb: 3, borderBottom: 1, borderColor: "divider" }}
-              >
-                  <Typography variant="body1" sx={{ pl: 1, pr: 1, fontStyle:"italic" }}>
-                    Cảm ơn {data.name} đã gửi thư cho tớ, chắc là tớ sẽ đọc sớm thôi. Thư gửi tớ k biết có đến tay tớ hay không nhưng mà chắc là có đó . Nếu hong đến được thì chúng ta có thể nói chuyện nhaaa. 😺
-                  </Typography>
-              </CardContent>
-              <CardActionArea onClick={handleImageClick}>
+            <CardContent
+              sx={{ pt: 3, pb: 3, borderBottom: 1, borderColor: "divider" }}
+            >
+              <Typography variant="body1" sx={{ pl: 1, pr: 1, fontStyle: "italic" }}>
+                Cảm ơn {data.name} đã gửi thư cho tớ, chắc là tớ sẽ đọc sớm thôi. Thư gửi tớ k biết có đến tay tớ hay không nhưng mà chắc là có đó. Nếu hong đến được thì chúng ta có thể nói chuyện nhaaa. 😺
+              </Typography>
+            </CardContent>
+            <CardActionArea onClick={handleImageClick}>
               <CardMedia
                 component="img"
                 height="400"
@@ -60,14 +64,17 @@ const Thanks = ({ show, data, available }) => {
                 }}
               />
             </CardActionArea>
-              <CardActions sx={{ pl: 2, pr: 2, pt: 2, pb: 2 }}>
-                  <Button size="small" color="primary" onClick={() => {window.open("https://m.me/MrDatDepZai", "_blank")}}>
-                  Direct của tớ
-                </Button>
-                <Button size="small" color="primary" onClick={() => {window.open("https://open.spotify.com/playlist/05ZbS9r25KsfrJOfKinPbe?si=aad3afacf4c94f4b", "_blank")}}>
-                  Playlist của tớ nè
-                </Button>
-              </CardActions>
+            <CardActions sx={{ pl: 2, pr: 2, pt: 2, pb: 2 }}>
+              <Button size="small" color="primary" onClick={handleReadLetter}>
+                Đọc lại thư
+              </Button>
+              <Button size="small" color="primary" onClick={() => { window.open("https://m.me/MrDatDepZai", "_blank") }}>
+                Direct của tớ
+              </Button>
+              <Button size="small" color="primary" onClick={() => { window.open("https://open.spotify.com/playlist/05ZbS9r25KsfrJOfKinPbe?si=aad3afacf4c94f4b", "_blank") }}>
+                Playlist của tớ nè
+              </Button>
+            </CardActions>
           </Card>
         </div>
       </Collapse>

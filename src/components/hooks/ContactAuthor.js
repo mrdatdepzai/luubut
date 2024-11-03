@@ -83,7 +83,14 @@ const ContactAuthor = () => {
               border: `3px solid ${theme.palette.mode === 'dark' ? '#2d2d2d' : '#fff'}`,
               boxShadow: theme.palette.mode === 'dark' 
                 ? '0 4px 12px rgba(0,0,0,0.3)'
-                : '0 4px 12px rgba(0,0,0,0.15)'
+                : '0 4px 12px rgba(0,0,0,0.15)',
+              transition: 'transform 0.3s ease',
+              '&:hover': {
+                transform: 'scale(1.1)',
+              },
+              '&:active': {
+                transform: 'scale(0.95)',
+              }
             }}
           />
           <Typography 
