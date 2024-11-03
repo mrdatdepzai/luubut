@@ -184,7 +184,7 @@ const MusicPlayer = () => {
                 color="success" 
                 size="small"
                 startIcon={<QueueMusic />}
-                onClick={() => window.open("https://open.spotify.com/playlist/7toU7okc85X0gVDEOWcWYi?si=fcb559ec8603406c", "_blank")}
+                onClick={() => window.open("https://open.spotify.com/playlist/2ByAJQseXXgs4I0gsjCrko?si=647f46a8e72b45ac", "_blank")}
               >
                 Playlist
               </Button>
