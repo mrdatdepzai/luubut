@@ -38,17 +38,10 @@ const StyledBox = styled(Box)(({ theme }) => ({
 const MusicPlayer = () => {
   const [playing, setPlaying] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [volume, setVolume] = useState(80);
   const [progress, setProgress] = useState(0);
   const [liked, setLiked] = useState(false);
   const [showLyrics, setShowLyrics] = useState(false);
   const audioRef = useRef(null);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
 
   const handleTimeUpdate = () => {
     if (audioRef.current) {
@@ -64,14 +57,6 @@ const MusicPlayer = () => {
     if (audioRef.current) {
       const duration = audioRef.current.duration;
       audioRef.current.currentTime = (newProgress / 100) * duration;
-    }
-  };
-
-  const handleVolumeChange = (e) => {
-    const newVolume = parseFloat(e.target.value);
-    setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume / 100;
     }
   };
 
@@ -185,26 +170,6 @@ const MusicPlayer = () => {
                   cursor: 'pointer'
                 }}
               />
-            </Box>
-
-            {/* Volume Control */}
-            <Box sx={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: 1, 
-              mb: 2,
-              width: '200px'
-            }}>
-              <VolumeDown />
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={volume}
-                onChange={handleVolumeChange}
-                style={{ flex: 1 }}
-              />
-              <VolumeUp />
             </Box>
 
             {/* Lyrics Toggle & Playlist */}
