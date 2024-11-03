@@ -28,7 +28,6 @@ Truy cập trang lưu bút tại: [https://luubut.netlify.app/](https://luubut.n
    ```
 5. **Truy cập Ứng Dụng**: Mở trình duyệt và truy cập `http://localhost:3000` để xem 
 
-{{ edit_2 }}
 ## Hướng Dẫn Sử Dụng
 1. Truy cập trang web.
 2. Đăng nhập hoặc tạo tài khoản nếu cần.
