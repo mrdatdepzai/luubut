@@ -9,8 +9,6 @@ Truy cập trang lưu bút tại: [https://luubut.netlify.app/](https://luubut.n
 - Xem các lời nhắn từ bạn bè
 - Chia sẻ kỷ niệm và hình ảnh
 - Viết lưu bút 
-
-{{ edit_1 }}
 ## Hướng Dẫn Cài Đặt Trang Web
 1. **Clone Repository**: Sử dụng lệnh sau để clone repository về máy:
    ```bash
