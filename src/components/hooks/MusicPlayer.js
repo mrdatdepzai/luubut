@@ -1,90 +1,352 @@
-import {React, useEffect, useState} from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Nhac from "./nhac.mp3";
-import {Button, CardActionArea } from '@mui/material'
-
-const useAudio = url => {
-  const [audio] = useState(new Audio(url));
-  const [playing, setPlaying] = useState(false);
-
-  const toggle = () => { setPlaying(!playing); };
-
-  const replay = () => {
-    audio.currentTime = 0;
-    setPlaying(true);
-  };
-
-  useEffect(() => {
-    audio.volume = 0.7;
-    playing ? audio.play() : audio.pause();
-    },
-    [playing, audio]
-  );
-
-  useEffect(() => {
-    audio.addEventListener('ended', () => setPlaying(false));
-
-    return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
-    };
-  }, [audio]);
-
-  return [playing, toggle, replay,];
-};
+import React, { useState, useRef, useEffect } from 'react';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Box,
+  Button,
+  Modal,
+  IconButton,
+  Tooltip,
+  Fade,
+  Collapse,
+  CardActionArea
+} from "@mui/material";
+import {
+  Facebook,
+  Instagram,
+  Email,
+  GitHub,
+  Favorite,
+  FavoriteBorder,
+  VolumeUp,
+  VolumeDown,
+  PlayArrow,
+  Pause,
+  SkipNext,
+  SkipPrevious,
+  QueueMusic // Icon cho playlist
+} from '@mui/icons-material';
+import audioFile from './nhac.mp3'; // Thêm import file nhạc
 
 const MusicPlayer = () => {
-  const [playing, toggle, replay] = useAudio(Nhac);
+  const [playing, setPlaying] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [volume, setVolume] = useState(80);
+  const [progress, setProgress] = useState(0);
+  const [liked, setLiked] = useState(false);
+  const [showLyrics, setShowLyrics] = useState(false);
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    // Khởi tạo volume khi component mount
+    if (audioRef.current) {
+      audioRef.current.volume = volume / 100;
+    }
+  }, []);
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      const duration = audioRef.current.duration;
+      const currentTime = audioRef.current.currentTime;
+      setProgress((currentTime / duration) * 100 || 0);
+    }
+  };
+
+  const handleProgressChange = (e) => {
+    const newProgress = parseFloat(e.target.value);
+    setProgress(newProgress);
+    if (audioRef.current) {
+      const duration = audioRef.current.duration;
+      audioRef.current.currentTime = (newProgress / 100) * duration;
+    }
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume / 100;
+    }
+  };
+
+  const handlePlayPause = () => {
+    if (audioRef.current) {
+      if (playing) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play().catch(error => {
+          console.error("Error playing audio:", error);
+        });
+      }
+      setPlaying(!playing);
+    }
+  };
+
   return (
-    <div className="music-container">
-      <Card variant="outlined" sx={{ display: {md:"flex", sm:"block"}, p:2, justifyContent:"left" }}>
-      <CardActionArea
-      sx={{ width: {md:"250px",xs:"100%"}, borderRadius: 1 , aspectRatio:"1/1"}}
-      >
-      <CardMedia
-          component="img"
-          sx={{ width: {md:"250px",xs:"100%"}, borderRadius: 1 , aspectRatio:"1/1"}}
-          image="https://img.upanh.tv/2024/06/05/imagec7ce1dca1af44cfb.png"
-          alt=""
-        />
+    <>
+      <Card sx={{ 
+        display: 'flex', 
+        flexDirection: { xs: 'column', md: 'row' }, 
+        mb: 2,
+        alignItems: 'center'
+      }}>
+        <CardActionArea onClick={() => setOpenModal(true)}>
+          <CardMedia
+            component="img"
+            sx={{ width: { xs: '100%', md: 300 } }}
+            image="https://img.upanh.tv/2024/06/05/imagec7ce1dca1af44cfb.png"
+            alt="Live from space album cover"
+          />
         </CardActionArea>
-        <Box sx={{ml:{md:'1em'}, mt:{xs:'1em'}, display: "flex", flexDirection: "column" , justifyContent:"center", alignItems:"center", width:'100%'}}>
-          <CardContent sx={{width:'95%', justifyContent:"center", alignItems:"center"}}>
-            <Typography component="div" variant="h5">
-            Mình cầm băng đóng nhau 
+
+        <Box sx={{
+          ml: { md: '1em' },
+          mt: { xs: '1em' },
+          display: "flex",
+          flexDirection: "column",
+          width: '100%',
+          p: 2
+        }}>
+          <CardContent sx={{ 
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 1
+          }}>
+            {/* Title and Info */}
+            <Typography variant="h5" component="div" sx={{
+              fontWeight: 500,
+              letterSpacing: 0.5,
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              width: '100%',
+              textAlign: 'center'
+            }}>
+              Mình cầm băng đóng nhau
             </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-            >
+            
+            <Typography variant="subtitle1" color="text.secondary">
               A12-K4
             </Typography>
-            <Typography
-              variant="subtitle1"
-              sx={{mt:'1em'}}
-              component="div"
-            >
+            
+            <Typography variant="subtitle1" sx={{ mb: 1 }}>
               @mrdatdepzai
             </Typography>
+
+            {/* Main Controls */}
+            <Box sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 2, 
+              mb: 2,
+              width: '100%',
+              justifyContent: 'center'
+            }}>
+              <IconButton onClick={() => {}} size="small">
+                <SkipPrevious />
+              </IconButton>
+              <IconButton 
+                onClick={handlePlayPause} 
+                size="large"
+                sx={{
+                  '&:hover': {
+                    transform: 'scale(1.1)',
+                    transition: 'transform 0.2s'
+                  }
+                }}
+              >
+                {playing ? <Pause /> : <PlayArrow />}
+              </IconButton>
+              <IconButton onClick={() => {}} size="small">
+                <SkipNext />
+              </IconButton>
+              <IconButton onClick={() => setLiked(!liked)} size="small">
+                {liked ? <Favorite color="error" /> : <FavoriteBorder />}
+              </IconButton>
+            </Box>
+
+            {/* Progress Bar */}
+            <Box sx={{ 
+              width: '100%', 
+              mb: 2,
+              px: 2 
+            }}>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={progress}
+                onChange={handleProgressChange}
+                style={{ 
+                  width: '100%',
+                  height: '4px',
+                  borderRadius: '2px',
+                  cursor: 'pointer'
+                }}
+              />
+            </Box>
+
+            {/* Volume Control */}
+            <Box sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 1, 
+              mb: 2,
+              width: '200px'
+            }}>
+              <VolumeDown />
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={volume}
+                onChange={handleVolumeChange}
+                style={{ flex: 1 }}
+              />
+              <VolumeUp />
+            </Box>
+
+            {/* Lyrics Toggle & Playlist */}
+            <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+              <Button 
+                variant="outlined" 
+                size="small"
+                onClick={() => setShowLyrics(!showLyrics)}
+              >
+                {showLyrics ? 'Hide Lyrics' : 'Show Lyrics'}
+              </Button>
+              <Button 
+                variant="outlined" 
+                color="success" 
+                size="small"
+                startIcon={<QueueMusic />}
+                onClick={() => window.open("https://open.spotify.com/playlist/7toU7okc85X0gVDEOWcWYi?si=fcb559ec8603406c", "_blank")}
+              >
+                Playlist
+              </Button>
+            </Box>
+
+            {/* Lyrics */}
+            <Collapse in={showLyrics}>
+              <Box sx={{ 
+                textAlign: 'center', 
+                mb: 2,
+                maxWidth: '100%',
+                px: 2,
+                '& .verse': {
+                  mb: 2
+                }
+              }}>
+                <Typography 
+                  variant="body1" 
+                  component="div"
+                  sx={{
+                    whiteSpace: 'pre-line',
+                    lineHeight: 1.8,
+                    fontStyle: 'italic',
+                    color: 'text.secondary'
+                  }}
+                >
+                  <div className="verse">
+                    Mình cùng nhau đóng băng trước giây phút chúng ta chia xa
+                    Thời học sinh lướt qua nhanh như giấc mơ không trở lại
+                    Mình phải trải qua
+                    Bạn đừng khóc mà
+                    Bọn mình sẽ lớn, sẽ đi trên những con đường mới.
+                  </div>
+
+                  <div className="verse">
+                    Là chưa hôm nào đến lớp sớm như hôm nay
+                    Trời nắng nhẹ, êm đềm, gió lay
+                    Là cảm xúc khó nói chỉ biết đứng ngẩn ngơ
+                    Níu tà áo dài bay bay
+                  </div>
+
+                  {/* ... các verse khác tương tự ... */}
+                </Typography>
+              </Box>
+            </Collapse>
+
+            {/* Social Links */}
+            <Box sx={{ 
+              display: 'flex', 
+              gap: 2, 
+              justifyContent: 'center'
+            }}>
+              <Tooltip title="Facebook">
+                <IconButton onClick={() => window.open("https://facebook.com/mrdatdepzai", "_blank")}>
+                  <Facebook />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Instagram">
+                <IconButton onClick={() => window.open("https://instagram.com/mrdatdepzai", "_blank")}>
+                  <Instagram />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="GitHub">
+                <IconButton onClick={() => window.open("https://github.com/mrdatdepzai", "_blank")}>
+                  <GitHub />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Email">
+                <IconButton onClick={() => window.open("mailto:dat037sk@gmail.com", "_blank")}>
+                  <Email />
+                </IconButton>
+              </Tooltip>
+            </Box>
           </CardContent>
-          <Box sx={{ display: "flex", alignItems: "center", pl: {md:1, xs:0}, pb: 1}}>
-            <Button onClick={toggle}>
-              {playing ? "Pause" : "Play"}
-            </Button>
-            <Button sx={{ml:'1em'}} onClick={replay}>
-              Replay
-            </Button>
-            <Button sx={{ml:'1em'}} variant="outlined" color="success" onClick={() => {window.open("https://open.spotify.com/playlist/7toU7okc85X0gVDEOWcWYi?si=fcb559ec8603406c", "_blank")}}>
-              Playlist
-            </Button>
-          </Box>
         </Box>
       </Card>
-    </div>
+
+      {/* Audio Element */}
+      <audio
+        ref={audioRef}
+        src={audioFile}
+        onTimeUpdate={handleTimeUpdate}
+        onEnded={() => setPlaying(false)}
+        onError={(e) => console.error("Audio error:", e)}
+      />
+
+      {/* Image Modal */}
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        closeAfterTransition
+        sx={{
+          backdropFilter: 'blur(8px)',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        }}
+      >
+        <Fade in={openModal}>
+          <Box sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 'auto',
+            maxWidth: '90vw',
+            maxHeight: '90vh',
+          }}>
+            <img
+              src="https://img.upanh.tv/2024/06/05/imagec7ce1dca1af44cfb.png"
+              alt="Enlarged view"
+              style={{
+                width: '100%',
+                height: 'auto',
+                maxHeight: '90vh',
+                objectFit: 'contain',
+                borderRadius: '8px',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+              }}
+            />
+          </Box>
+        </Fade>
+      </Modal>
+    </>
   );
 };
 

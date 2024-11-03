@@ -49,7 +49,7 @@ const Letter = ({ show, data, showLetter }) => {
                     <i>{data.message}</i>
                     <br/>
                     <br/>
-                    Hết rùi nè, chắc tớ cũng k viết gì nữa, hi vọng là nó k lỗi để tớ còn gửi được =)))). Đỗ HUST nha :3
+                    Hết rùi nè, chắc tớ cũng k viết gì nữa, hi vọng là nó k lỗi để tớ còn gửi được =)))). Đỗ KMA nha :3
                     <br/>
                     Kí tên
                     <br/>

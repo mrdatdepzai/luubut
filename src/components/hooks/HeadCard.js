@@ -1,69 +1,129 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
-  CardHeader,
   CardMedia,
   CardActions,
-  CardActionArea,
   Button,
   Typography,
+  Modal,
+  Box,
 } from "@mui/material";
 import dc from "../lib/DataConfig";
 
-const HeadCard = ({ show, setShow, available, setShowLetter, showLetter }) => {
+const HeadCard = ({ show, setShow, setData, available, showLetter, setShowLetter }) => {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleStart = () => {
+    setShow(true);
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  };
+
+  const handleReadLetter = () => {
+    setShowLetter(true);
+    setTimeout(() => {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    maxWidth: '90vw',
+    maxHeight: '90vh',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 1,
+    outline: 'none',
+    borderRadius: '8px',
+    '& img': {
+      width: '100%',
+      height: 'auto',
+      maxHeight: '85vh',
+      objectFit: 'contain'
+    }
+  };
+
   return (
-    <Card variant="outlined"
+    <Card
+      className="card-hover"
       sx={{
-        width: "100%",
-        // backgroundColor: "defaultBg.default",
+        maxWidth: "100%",
+        marginBottom: "20px",
+        display: show ? "none" : "block",
+        borderRadius: "12px",
+        overflow: "hidden",
+        background: "linear-gradient(145deg, #ffffff 0%, #f5f5f5 100%)",
       }}
     >
-      <div className="headCard-container">
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="100%"
-            image={dc.headCard.image}
-            alt="Letter image"
+      <CardMedia
+        component="img"
+        height="400"
+        image={dc.headCard.image}
+        alt="green iguana"
+        sx={{ cursor: 'pointer' }}
+        onClick={() => setOpenModal(true)}
+      />
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby="modal-image"
+        sx={{
+          backdropFilter: 'blur(5px)',
+          transition: 'all 0.3s ease-in-out'
+        }}
+      >
+        <Box sx={modalStyle}>
+          <img
+            src={dc.headCard.image}
+            alt="Enlarged view"
+            style={{ 
+              transition: 'transform 0.3s ease-in-out',
+              '&:hover': {
+                transform: 'scale(1.02)'
+              }
+            }}
           />
-        </CardActionArea>
-        <CardHeader
-          title={dc.headCard.title}
-          titleTypographyProps={{ variant: "h5" }}
-          sx={{
-            borderBottom: 1,
-            borderColor: "divider",
-            pl: 3,
-            pr: 3,
-            pt: 4,
-            pb: 3,
-          }}
-          subheader={dc.headCard.subheader}
-          subheaderTypographyProps={{ variant: "subtitle1" }}
-        />
-        <CardContent
-          sx={{ borderBottom: 1, borderColor: "divider", pt: 3, pb: 3 }}
+        </Box>
+      </Modal>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {dc.headCard.title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {dc.headCard.content}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {dc.headCard.content2}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {dc.headCard.content3}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button
+          variant="contained"
+          onClick={handleStart}
+          disabled={showLetter}
         >
-          <Typography variant="body1" sx={{ pl: 1, pr: 1 }}>
-            {dc.headCard.content}
-            <br/>
-            <br/>
-            {dc.headCard.content2}
-            <br/>
-            <br/>
-            Mọi người điền cũng được, không điền cũng không sao:))) Tớ cũng rất thích đọc những gì mọi người viết cho tớ. Cảm ơn hehe!
-          </Typography>
-        </CardContent>
-        <CardActions sx={{ pl: 2, pr: 2, pt: 2, pb: 2 }}>
-          <Button size="small" color="primary" onClick={() => setShow(!show)} disabled={!available}>
-            {dc.headCard.button1}
-          </Button>
-          <Button size="small" color="primary" onClick={() => setShow(false) & setShowLetter(!showLetter)} disabled={available}>
-            {dc.headCard.button2}
-          </Button>
-        </CardActions>
-      </div>
+          {dc.headCard.button1}
+        </Button>
+        <Button
+          variant="contained"
+          onClick={handleReadLetter}
+          disabled={available}
+        >
+          {dc.headCard.button2}
+        </Button>
+      </CardActions>
     </Card>
   );
 };

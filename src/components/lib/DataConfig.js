@@ -53,7 +53,39 @@ const dc = {
     },
     copyright:{
         copyright:"Dat "
+    },
+    contact: {
+        title: "Contact Author",
+        socials: {
+            facebook: "https://facebook.com/mrdatdepzai",
+            instagram: "https://instagram.com/mrdatdepzai",
+            github: "https://github.com/mrdatdepzai",
+            linkedin: "https://linkedin.com/in/mrdatdepzai",
+            email: "mailto:dat037sk@gmail.com"
+        }
     }
 }
+
+const theme = {
+  typography: {
+    h6: {
+      fontWeight: 600,
+      letterSpacing: 0.5,
+      marginBottom: '1rem'
+    },
+    subtitle2: {
+      opacity: 0.8,
+      lineHeight: 1.6
+    },
+    body1: {
+      lineHeight: 1.8
+    }
+  },
+  spacing: {
+    card: {
+      padding: '24px'
+    }
+  }
+};
 
 export default dc;

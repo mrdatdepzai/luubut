@@ -108,7 +108,18 @@ const Submit = ({
             </Typography>
           </CardContent>
           <CardActions sx={{ pl: 3, pr: 3, pb: 3, pt: 3 }}>
-            <Button endIcon={<SendRoundedIcon />} variant="outlined" onClick={handleSubmit}>
+            <Button 
+              endIcon={<SendRoundedIcon />} 
+              variant="outlined" 
+              onClick={handleSubmit}
+              sx={{
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                }
+              }}
+            >
               {dc.submit.button}
             </Button>
             <Button variant="text" onClick={()=>{window.scrollTo({ top: 750, behavior: "smooth" })}}>

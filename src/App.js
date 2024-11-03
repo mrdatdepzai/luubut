@@ -10,7 +10,8 @@ import {
   AboutMe,
   Letter,
   Theme,
-  WarnBeforeUnload
+  WarnBeforeUnload,
+  ContactAuthor
 } from "./components/hooks";
 import { useState, useEffect } from "react";
 import { Analytics } from "@vercel/analytics/react";
@@ -73,6 +74,7 @@ function App() {
         available={available}
         setAvailable={setAvailable}
         setShowLetter={setShowLetter} />
+      <ContactAuthor />
       <Analytics />
       {(data.name || data.about || data.message || data.memories) && available && <WarnBeforeUnload />}
     </Theme>
