@@ -19,7 +19,7 @@ Truy cập trang lưu bút tại: [https://luubut.netlify.app/](https://luubut.n
 2. **Cài Đặt Node.js**: Đảm bảo bạn đã cài đặt Node.js. Nếu chưa, hãy tải và cài đặt từ [nodejs.org](https://nodejs.org/).
 3. **Cài Đặt Thư Viện**: Vào thư mục dự án và chạy lệnh sau để cài đặt các thư viện cần thiết:
    ```bash
-   cd repo-name
+   cd luubut
    npm install
    ```
 4. **Chạy Ứng Dụng**: Sử dụng lệnh sau để khởi động ứng dụng:
