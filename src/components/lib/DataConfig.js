@@ -66,26 +66,4 @@ const dc = {
     }
 }
 
-const theme = {
-  typography: {
-    h6: {
-      fontWeight: 600,
-      letterSpacing: 0.5,
-      marginBottom: '1rem'
-    },
-    subtitle2: {
-      opacity: 0.8,
-      lineHeight: 1.6
-    },
-    body1: {
-      lineHeight: 1.8
-    }
-  },
-  spacing: {
-    card: {
-      padding: '24px'
-    }
-  }
-};
-
 export default dc;

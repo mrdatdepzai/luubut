@@ -8,7 +8,6 @@ import {
   Button,
   Modal,
   IconButton,
-  Tooltip,
   Fade,
   Collapse,
   CardActionArea
@@ -46,11 +45,10 @@ const MusicPlayer = () => {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    // Khởi tạo volume khi component mount
     if (audioRef.current) {
-      audioRef.current.volume = volume / 100;
+      audioRef.current.volume = volume;
     }
-  }, []);
+  }, [volume]);
 
   const handleTimeUpdate = () => {
     if (audioRef.current) {
