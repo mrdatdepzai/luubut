@@ -1,190 +1,177 @@
-.App{
+/* Main container */
+.App {
   text-align: left;
   display: block;
   margin: 0 auto;
-  padding: 5em 0;
+  padding-top: 5em;
+  padding-bottom: 5em;
   width: 35%;
   animation: fadeIn 0.5s ease-in;
 }
 
+/* Fade-in animation */
 @keyframes fadeIn {
-from {
-  opacity: 0;
-  transform: translateY(20px);
-}
-to {
-  opacity: 1;
-  transform: translateY(0);
-}
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }
 
+/* Card hover effect */
 .card-hover {
-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
-
 .card-hover:hover {
-transform: translateY(-5px);
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Thêm animation cho Collapse */
+/* Smooth transition for Collapse */
 .MuiCollapse-root {
-transition: all 0.5s ease-in-out !important;
+  transition: all 0.5s ease-in-out !important;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-width: 8px;
+  width: 8px;
 }
-
 ::-webkit-scrollbar-track {
-background: #f1f1f1;
+  background: #f1f1f1;
 }
-
 ::-webkit-scrollbar-thumb {
-background: #888;
-border-radius: 4px;
+  background: #888;
+  border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-background: #555;
+  background: #555;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* Hide scrollbar for various browsers */
 html::-webkit-scrollbar {
-display: none;
+  display: none;
+}
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  transition: all 0.5s ease-in-out;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-html{
--ms-overflow-style: none;  /* IE and Edge */
-scrollbar-width: none;  /* Firefox */
-/* smooth the transtiion all the time */
-transition: all 0.5s ease-in-out;
-}
-
-
-/* Extra small devices (phones, 600px and down) */
+/* Responsive layout for different screen sizes */
 @media only screen and (max-width: 600px) {
-.App{
-  width: 92vw;
-  padding-top: 2em;
+  .App {
+      width: 95vw;
+      padding-top: 1em;
+      padding-bottom: 1em;
+  }
+  .card-hover:hover {
+      transform: none;
+      box-shadow: none;
+  }
+  .image-full, .responsive-image, .image-responsive, .dialog-image {
+      width: 100%;
+      height: auto;
+      max-height: 90vh;
+      object-fit: cover;
+  }
 }
 
-.card-hover:hover {
-  transform: none;
-  box-shadow: none;
-}
-}
-/* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-.App{
-  width: 90vw;
-  padding-top: 3em;
+  .App {
+      width: 90vw;
+      padding-top: 3em;
+  }
 }
-}
-/* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-.App{
-  width: 60%;
-  padding-top: 3em;
+  .App {
+      width: 60%;
+      padding-top: 3em;
+  }
 }
-}
-/* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-.App{
-  width: 50%;
-  padding-top: 3em;
+  .App {
+      width: 50%;
+      padding-top: 3em;
+  }
 }
-}
-
 @media only screen and (min-width: 1450px) {
-.App{
-  width: 35%;
-  padding-top: 3em;
-}
-}
-
-.headCard-container{
-display: block;
-width: 100%;
+  .App {
+      width: 35%;
+      padding-top: 3em;
+  }
 }
 
-.music-container{
-display: block;
-width: 100%;
-margin-bottom: 2em;
-}
-
-.nameInput-container{
-display: block;
-width: 100%;
-margin-bottom: 2em;
-}
-
-.multipleChoice-container{
-display: block;
-width: 100%;
-margin-bottom: 2em;
-}
-
-.form-container{
+/* General container styles */
+.music-container, .nameInput-container, .multipleChoice-container,
+.form-container, .shortText-container, .letter-container,
+.AboutMe-container, .thanks-container {
   display: block;
   width: 100%;
   margin-bottom: 2em;
 }
-
-.shortText-container{
-display: block;
-width: 100%;
-margin-bottom: 2em;
+.letter-container {
+  margin-top: 2em;
+}
+.music-container {
+  margin-top: 2em;
 }
 
-.letter-container{
-display: block;
-width: 100%;
-margin-bottom: 2em;
-margin-top: 2em;
-}
-
-.AboutMe-container{
-display: block;
-width: 100%;
-margin-bottom: 2em;
-}
-
-.thanks-container{
-display: block;
-width: 100%;
-}
-
-.music-container{
-display: block;
-width: 100%;
-margin-top: 2em;
-}
-
+/* Social icon hover effect */
 .social-icon-hover {
-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
-
 .social-icon-hover:hover {
-transform: translateY(-3px);
-filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+  transform: translateY(-3px);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
+/* Floating icon animation */
 @keyframes floatIcon {
-0% {
-  transform: translateY(0px);
+  0% {
+      transform: translateY(0px);
+  }
+  50% {
+      transform: translateY(-5px);
+  }
+  100% {
+      transform: translateY(0px);
+  }
 }
-50% {
-  transform: translateY(-5px);
-}
-100% {
-  transform: translateY(0px);
-}
+.floating-icon {
+  animation: floatIcon 3s ease-in-out infinite;
 }
 
-.floating-icon {
-animation: floatIcon 3s ease-in-out infinite;
+/* Modal styles for image display */
+.modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 0;
+}
+
+.modal img {
+  width: 100vw;
+  height: auto;
+  max-height: 100vh;
+  cursor: pointer;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+/* Override specific styles on mobile */
+@media only screen and (max-width: 600px) {
+  .modal img {
+      width: 100vw;
+      height: auto;
+  }
 }

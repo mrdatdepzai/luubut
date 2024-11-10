@@ -7,7 +7,7 @@ import {
   CardActionArea,
   Button,
   Collapse,
-  Typography,
+  Typography, 
   Dialog,
 } from "@mui/material";
 
@@ -83,17 +83,12 @@ const Thanks = ({ show, data, available }) => {
         open={openImage}
         onClose={handleCloseImage}
         maxWidth="xl"
-        onClick={handleCloseImage}
+        fullWidth
       >
         <img
           src="https://img.upanh.tv/2024/06/05/imaged47490f4a422b73b.png"
           alt="Tớ ngồi code sml"
-          style={{
-            width: '100%',
-            height: 'auto',
-            maxHeight: '90vh',
-            objectFit: 'contain'
-          }}
+          style={{ width: '100%', height: 'auto' }}
         />
       </Dialog>
     </>
