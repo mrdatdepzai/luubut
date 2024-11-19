@@ -26,13 +26,7 @@ Truy cập trang lưu bút tại: [https://luubut.netlify.app/](https://luubut.n
    ```
 5. **Truy cập Ứng Dụng**: Mở trình duyệt và truy cập `http://localhost:3000` để xem 
 
-## Hướng Dẫn Sử Dụng
-1. Truy cập trang web.
-2. Đăng nhập hoặc tạo tài khoản nếu cần.
-3. Chọn tính năng bạn muốn sử dụng: xem lời nhắn, chia sẻ kỷ niệm hoặc viết lưu bút.
-4. Làm theo hướng dẫn trên màn hình để hoàn tất.
 
-{{ edit_3 }}
 ## Công Nghệ Sử Dụng
 - HTML/CSS
 - JavaScript
